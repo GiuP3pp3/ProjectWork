@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it" class="h-100">
+	<head th:replace="../template/base-template :: headFragment"></head>
+	<body class="d-flex flex-column h-100">
+		<div class="container">
+			<nav th:replace="../template/base-template :: navFragment"></nav>
+			<div th:replace="../template/base-template :: headerFragment"></div>		
+			<div class="row mt-4">
+				<div class="col-12 text-center">
+					<h4 th:text="#{label.customersmanagement}"></h4>
+				</div>
+			</div>
+			<div class="row mt-4">
+				<div class="col-7">
+					<table class="table table-striped table-responsive">
+						<thead>
+							<tr>
+								<th th:text="#{label.surname}"></th>
+								<th th:text="#{label.fiscalcode}"></th>
+								<th th:text="#{label.username}"></th>
+								<th th:text="#{label.town}"></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="c : ${customers}">
+								<td th:text="${c.surname}"></td>
+								<td th:text="${c.fiscalCode}"></td>
+								<td th:text="${c.profile.username}"></td>
+								<td th:text="${c.address.town}"></td>
+								<td class="text-end">
+									<a th:href="@{/customers(id=${c.id})}" class="btn btn-primary btn-sm small-button" 
+										th:text="#{btn.edit}"></a>
+									<a th:href="@{customers/deletecustomer(id=${c.id})}" class="btn btn-danger btn-sm small-button" 
+										th:text="#{btn.delete}"></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-1"></div>
+				<div class="col-4">
+					<form method="POST" th:object="${customer}">
+						<div class="row">
+							<div class="col-12">
+								<label for="surname" th:text="#{label.surname} + ':'"></label>
+								<input type="text" id="surname" th:field="*{surname}" 
+									class="form-control" required="required">
+								<p th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" 
+									class="text-danger"></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<label for="fiscalCode" th:text="#{label.fiscalcode} + ':'"></label>
+								<input type="text" id="fiscalCode" th:field="*{fiscalCode}" class="form-control" 
+									required="required">
+								<p th:if="${#fields.hasErrors('fiscalCode')}" th:errors="*{fiscalCode}" 
+									class="text-danger"></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<label for="username" th:text="#{label.username} + ':'"></label>
+								<input type="text" id="username" th:field="*{profile.username}" class="form-control" 
+									required="required">
+								<p th:if="${#fields.hasErrors('profile.username')}" th:errors="*{profile.username}" 
+									class="text-danger"></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<label for="password" th:text="#{label.password} + ':'"></label>
+								<input type="password" id="password" th:field="*{profile.password}" class="form-control" 
+									required="required">
+								<p th:if="${#fields.hasErrors('profile.password')}" th:errors="*{profile.password}" 
+									class="text-danger"></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<label for="street" th:text="#{label.street} + ':'"></label>
+								<input type="text" id="street" th:field="*{address.street}" class="form-control" 
+									required="required">
+								<p th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}" 
+									class="text-danger"></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<label for="town" th:text="#{label.town} + ':'"></label>
+								<input type="text" id="town" th:field="*{address.town}" class="form-control" 
+									required="required">
+								<p th:if="${#fields.hasErrors('address.town')}" th:errors="*{address.town}" 
+									class="text-danger"></p>
+							</div>
+						</div>
+						<div class="row mt-4">
+							<div class="col-12 text-center">
+								<input type="submit" th:value="#{btn.register}" class="btn btn-primary large-button">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+	<footer th:replace="../template/base-template :: footerFragment"></footer>
+</html>
