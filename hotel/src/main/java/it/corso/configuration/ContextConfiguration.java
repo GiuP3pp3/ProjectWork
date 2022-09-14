@@ -1,7 +1,5 @@
 package it.corso.configuration;
 
-import javax.persistence.SharedCacheMode;
-import javax.persistence.ValidationMode;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -32,9 +24,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"it.corso.controller","it.corso.service","it.corso.dao"})
-@EnableTransactionManagement
+
 @PropertySource(value = {"classpath:application.properties"})
-@EnableJpaRepositories(basePackages = {"it.corso.dao"}, entityManagerFactoryRef= "emf", transactionManagerRef= "tmf")
 public class ContextConfiguration implements WebMvcConfigurer{
 
 	@Autowired
@@ -95,47 +86,5 @@ public class ContextConfiguration implements WebMvcConfigurer{
 		return validator();
 	}
 	
-	// SEZIONE DATABASE
-	@Bean(name= "dataSource")
-	public DataSource getDataSource() {
-		
-		DriverManagerDataSource dataSource= new DriverManagerDataSource();
-		dataSource.setDriverClassName(env.getRequiredProperty("jdbc.driver"));
-		dataSource.setUrl(env.getRequiredProperty("jdbc.url"));
-		dataSource.setUsername(env.getRequiredProperty("jdbc.username"));
-		dataSource.setPassword(env.getRequiredProperty("jdbc.password"));
-		return dataSource;
-	}
 	
-	@Bean
-	public JpaVendorAdapter getJpaVendorAdapter() {
-		
-		HibernateJpaVendorAdapter adapter= new HibernateJpaVendorAdapter();
-		adapter.setShowSql(true);
-		adapter.setGenerateDdl(false);
-		adapter.setDatabasePlatform(env.getRequiredProperty("hibernate.dialect"));
-		return adapter;
-	}
-	
-	// Questo è l'entity manager
-	@Bean(name= "emf")
-	public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean() {
-		
-		LocalContainerEntityManagerFactoryBean bean= new LocalContainerEntityManagerFactoryBean();
-		bean.setJpaVendorAdapter(getJpaVendorAdapter());
-		bean.setDataSource(getDataSource());
-		bean.setPackagesToScan("it.corso.model");
-		bean.setSharedCacheMode(SharedCacheMode.ENABLE_SELECTIVE);
-		bean.setValidationMode(ValidationMode.NONE);
-		return bean;
-	}
-	
-	// è relativo alle transazioni
-	@Bean(name= "tmf")
-	public JpaTransactionManager getJpaTransactionManager() {
-		
-		JpaTransactionManager manager= new JpaTransactionManager();
-		manager.setEntityManagerFactory(getEntityManagerFactoryBean().getObject());
-		return manager;
-	}
 }
