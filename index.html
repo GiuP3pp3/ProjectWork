@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it" class="h-100">
+	<head th:replace="../template/base-template :: headFragment"></head>
+	<body class="d-flex flex-column h-100">
+		<div class="container">
+			<div th:replace="../template/base-template :: headerFragment"></div>		
+			<div class="row mt-4">
+				<div class="col-10 text-center">
+					<h4 th:text="#{label.calendar}"></h4>
+				</div>
+			</div>
+			<div class="row justify-content-center mt-4">
+				<div class="col-10">
+					<table class="table table-striped table-responsive">
+						<thead>
+							<tr>
+								<th></th>
+								<th th:text="#{label.nominative}"></th>
+								<th class="text-center" th:text="#{label.room}"></th>
+								<th class="text-center" th:text="#{date.start}"></th>
+								<th class="text-center" th:text="#{date.end}"></th>
+								<th class="text-center" th:text="#{label.price}"></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="article : ${articles}">
+								<td>
+									<img th:src="@{static/image/markerImage.png}" class="img-thumbnail" alt="article"
+										style="width:50px;max-width:50px;height:60px;max-height:60px;">
+								</td>
+								<td class="align-middle" th:text="${article.description}">
+								</td>
+								<td class="align-middle text-center"
+									th:text="'Euro ' + ${#numbers.formatDecimal(article.price,0,'POINT',2,'COMMA')}">
+								</td>
+								<td class="align-middle text-end">
+									<a th:href="@{/articlecard(id=${article.id})}" 
+										class="btn btn-primary btn-sm small-button" th:text="#{btn.edit}">
+									</a>
+									<a th:href="@{/deletearticle(id=${article.id})}" 
+										class="btn btn-danger btn-sm small-button" th:text="#{btn.delete}">
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+	<footer th:replace="../template/base-template :: footerFragment"></footer>
+</html>
