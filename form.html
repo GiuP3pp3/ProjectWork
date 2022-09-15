@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="it" class="h-100">
+	<head th:replace="../template/base-template :: headFragment"></head>
+	<script th:src="@{static/javascript/article_script.js}"></script>
+	<body class="d-flex flex-column h-100">
+		<div class="container">
+		<div th:replace="../template/base-template :: sidebarFragment"></div>
+			<!-- <nav th:replace="../template/base-template :: navFragment"></nav> -->
+			<div th:replace="../template/base-template :: headerFragment"></div>		
+			<div class="row mt-4">
+				<div class="col-12 text-center">
+					<h4 th:text="#{label.createnewprenotation}"></h4>
+				</div>
+			</div>
+			<div class="row justify-content-center mt-4">
+				<div class="col-5">
+					<hr>
+					<h5 th:text="#{label.infoP}"></h5>	
+					<div th:if="${formError}" th:text="#{error.fielderrors}" 
+						class="alert alert-danger mt-4 text-center" role="alert"></div>
+					<form action="form/savestandard" method="POST"><!-- Backend -->
+						<div class="row">
+							<div class="col-12">
+								<label for="numeroStanza" th:text="#{label.room}"></label>
+									<select id="numeroStanza" name="numeroStanza" class="form-select">
+										<!--<option th:each="c : ${camere}" th:value="${c.id}" 
+											th:text="${c.id} + ' ' + ${c.tipo}"> 
+											  th:selected="${order.customer != null AND c.id == order.customer.id}"
+										</option>-->
+									</select>
+								</div>
+							</div>
+						<div class="row">
+							<div class="col-12">
+								<label for="dataIn" th:text="#{date.start} + ':'"></label>
+								<input type="date" name="dataIn" class="form-control" required="required">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<label for="dataFin" th:text="#{date.end} + ':'"></label>
+								<input type="date" name="dataFin" class="form-control" required="required">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<label for="numOsp" th:text="#{label.number} + ':'"></label>
+								<input type="number" name="numOsp" class="form-control" required="required">
+							</div>
+						</div>
+						<h5 th:text="#{label.infoC}"></h5>
+						<div class="row">
+							<div class="col-12">
+								<label for="nome" th:text="#{label.name} + ':'"></label>
+								<input type="text" name="nome" class="form-control" required="required">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<label for="cognome" th:text="#{label.surname} + ':'"></label>
+								<input type="text" name="cognome" class="form-control" required="required">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<label for="numDoc" th:text="#{label.numberdocument} + ':'"></label>
+								<input type="text" name="numDoc" class="form-control" required="required">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<label for="nascita" th:text="#{date.birth} + ':'"></label>
+								<input type="date" name="nascita" class="form-control" required="required">
+							</div>
+						</div>
+						<div class="row mt-4"><!-- Bottone -->
+							<div class="col-12 text-center">
+								<input type="submit" th:value="#{btn.book}" class="btn btn-success small-button">
+								<a th:href="@{/}" class="btn btn-secondary small-button" th:text="#{btn.back}"></a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+	<footer th:replace="../template/base-template :: footerFragment"></footer>
+</html>

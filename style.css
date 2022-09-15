@@ -1,0 +1,63 @@
+.small-button
+{
+	padding:0.4em 0.8em;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.5em;
+    box-sizing: border-box;
+    box-shadow:inset 0 -0.6em 0 -0.3em rgba(0,0,0,0.20);
+}
+
+.large-button
+{
+	padding:0.9em 1.4em;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.5em;
+    box-sizing: border-box;
+    box-shadow:inset 0 -0.6em 0 -0.3em rgba(0,0,0,0.20);
+    font-weight:bold;
+    font-size:30sp;
+}
+#sideNav {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+#sideNav .navbar-nav .nav-item .nav-link {/*testi in grassetto e link illuminati*/
+  font-weight: 800;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+}
+@media (min-width: 992px) {/*colonna verticale e non orizzontale*/
+  #sideNav {
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    width: 17rem;
+    height: 100vh;
+  }
+  #sideNav .navbar-brand {/*immagine*/
+    display: flex;
+    margin: auto auto 0;
+    padding: 0.5rem;
+  }
+  #sideNav .navbar-brand .img-profile {/*cerchietto attorno al logo*/
+    max-width: 10rem;
+    max-height: 10rem;
+    border: 0.5rem solid rgba(255, 255, 255, 0.2);
+  }
+  #sideNav .navbar-collapse .navbar-nav {/*menu testi in colonna*/
+    flex-direction: column;
+    padding-bottom:auto;
+    width: 100%;
+  }
+  @media (min-width: 992px) {
+  body {
+    padding-top: 0;
+    padding-left: 17rem;
+  }
+  }
+}
