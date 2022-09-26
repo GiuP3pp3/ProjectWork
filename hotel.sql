@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Set 21, 2022 alle 16:49
+-- Creato il: Set 26, 2022 alle 11:12
 -- Versione del server: 10.4.24-MariaDB
 -- Versione PHP: 8.1.6
 
@@ -41,7 +41,7 @@ CREATE TABLE `camera` (
 --
 
 INSERT INTO `camera` (`id`, `numero_stanza`, `tipo`, `posti_letto`, `tariffa`, `descrizione`) VALUES
-(1, '101', 'singola', 1, 60, 'Nord-vista lago'),
+(1, '101', 'singola', 1, 60, 'nord-vista lago'),
 (2, '201', 'singola', 1, 60, 'nord-vista lago'),
 (3, '207', 'singola', 1, 60, 'sud-vista montagna'),
 (4, '107', 'singola', 1, 60, 'sud-vista montagna'),
@@ -105,7 +105,7 @@ CREATE TABLE `prenotazione` (
 --
 
 INSERT INTO `prenotazione` (`id`, `check_in`, `check_out`, `numero_ospiti`, `prezzo_totale`, `id_nominativo`) VALUES
-(1, '2022-09-28', '2022-10-03', 2, 400, 1),
+(1, '2022-09-28', '2022-10-03', 2, 300, 1),
 (2, '2022-09-29', '2022-10-03', 3, 360, 2),
 (3, '2022-10-03', '2022-10-09', 2, 480, 3),
 (4, '2022-10-04', '2022-10-08', 3, 360, 4),
@@ -130,7 +130,6 @@ CREATE TABLE `prenotazioni_camere` (
 --
 
 INSERT INTO `prenotazioni_camere` (`id_prenotazione`, `id_camera`) VALUES
-(1, 6),
 (2, 12),
 (3, 7),
 (4, 12),
@@ -139,7 +138,8 @@ INSERT INTO `prenotazioni_camere` (`id_prenotazione`, `id_camera`) VALUES
 (5, 1),
 (6, 8),
 (7, 11),
-(8, 11);
+(8, 11),
+(1, 2);
 
 --
 -- Indici per le tabelle scaricate
@@ -186,13 +186,13 @@ ALTER TABLE `camera`
 -- AUTO_INCREMENT per la tabella `ospite`
 --
 ALTER TABLE `ospite`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT per la tabella `prenotazione`
 --
 ALTER TABLE `prenotazione`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Limiti per le tabelle scaricate
